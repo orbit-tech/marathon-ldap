@@ -17,14 +17,28 @@ public class LDAPConfig {
     private String userSearch = "(uid={username})";
 
     @JsonProperty(required = false)
-    private String userSubTree = "ou=People";
+    private String userSubTree = null;
 
     @JsonProperty(required = false)
     private String groupSearch = null;
 
     @JsonProperty(required = false)
-    private String groupSubTree = "ou=Group";
+    private String groupSubTree = null;
 
+    @JsonProperty(required = false)
+    private String bindUser = null;
+
+    @JsonProperty(required = false)
+    private String bindPassword = null;
+
+    @JsonProperty(required = false)
+    private boolean useSimpleAuthentication;
+
+    @JsonProperty(required = false)
+    private Integer ldapConnectTimeout = 3000;
+
+    @JsonProperty(required = false)
+    private Integer ldapReadTimeout = 3000;
 
     public LDAPConfig() {}
 
@@ -42,6 +56,22 @@ public class LDAPConfig {
 
     public void setBase(String base) {
         this.base = base;
+    }
+
+    public String getBindUser() {
+        return bindUser;
+    }
+
+    public String getBindPassword() {
+        return bindPassword;
+    }
+
+    public boolean useSimpleAuthentication() {
+        return useSimpleAuthentication;
+    }
+
+    public void setUseSimpleAuthentication(boolean useSimpleAuthentication) {
+        this.useSimpleAuthentication = useSimpleAuthentication;
     }
 
     public String getDn() {
@@ -84,16 +114,36 @@ public class LDAPConfig {
         this.userSubTree = userSubTree;
     }
 
+    public Integer getLdapConnectTimeout() {
+        return ldapConnectTimeout;
+    }
+
+    public void setLdapConnectTimeout(Integer ldapConnectTimeout) {
+        this.ldapConnectTimeout = ldapConnectTimeout;
+    }
+
+    public Integer getLdapReadTimeout() {
+        return ldapReadTimeout;
+    }
+
+    public void setLdapReadTimeout(Integer ldapReadTimeout) {
+        this.ldapReadTimeout = ldapReadTimeout;
+    }
+
     @Override
     public String toString() {
         return "LDAPConfig{" +
                 "url='" + url + '\'' +
                 ", base='" + base + '\'' +
                 ", dn='" + dn + '\'' +
+                ", bindUser='" + bindUser + '\'' +
+                ", bindPassword='" + bindPassword + '\'' +
                 ", userSearch='" + userSearch + '\'' +
                 ", userSubTree='" + userSubTree + '\'' +
                 ", groupSearch='" + groupSearch + '\'' +
                 ", groupSubTree='" + groupSubTree + '\'' +
+                ", ldapConnectTimeout='" + ldapConnectTimeout + '\'' +
+                ", ldapReadTimeout='" + ldapReadTimeout + '\'' +
                 '}';
     }
 }

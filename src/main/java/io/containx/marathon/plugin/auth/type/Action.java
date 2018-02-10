@@ -1,6 +1,6 @@
 package io.containx.marathon.plugin.auth.type;
 
-import mesosphere.marathon.plugin.auth.AuthorizedAction;
+import com.google.common.base.MoreObjects;
 import mesosphere.marathon.plugin.auth.*;
 
 /**
@@ -8,10 +8,12 @@ import mesosphere.marathon.plugin.auth.*;
  */
 public enum Action {
     // App Actions
-    CREATE_APP(CreateApp$.MODULE$, PermissionType.CREATE, EntityType.APP),
-    UPDATE_APP(UpdateApp$.MODULE$, PermissionType.UPDATE, EntityType.APP),
-    DELETE_APP(DeleteApp$.MODULE$, PermissionType.DELETE, EntityType.APP),
-    VIEW_APP(ViewApp$.MODULE$, PermissionType.VIEW, EntityType.APP),
+    CREATE_APP(CreateRunSpec$.MODULE$, PermissionType.CREATE, EntityType.APP),
+    UPDATE_APP(UpdateRunSpec$.MODULE$, PermissionType.UPDATE, EntityType.APP),
+    DELETE_APP(DeleteRunSpec$.MODULE$, PermissionType.DELETE, EntityType.APP),
+    VIEW_APP(ViewRunSpec$.MODULE$, PermissionType.VIEW, EntityType.APP),
+    VIEW_RESOURCE(ViewResource$.MODULE$, PermissionType.VIEW, EntityType.APP),
+    UPDATE_RESOURCE(UpdateResource$.MODULE$, PermissionType.UPDATE, EntityType.APP),
 
     // Group Actions
     CREATE_GROUP(CreateGroup$.MODULE$, PermissionType.CREATE, EntityType.GROUP),
@@ -44,5 +46,14 @@ public enum Action {
 
     public PermissionType getPermType() {
         return permType;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("action", action)
+                .add("entityType", entityType)
+                .add("permType", permType)
+                .toString();
     }
 }
